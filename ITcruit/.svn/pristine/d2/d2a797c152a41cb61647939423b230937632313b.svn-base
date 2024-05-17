@@ -1,0 +1,5 @@
+package kr.co.itcruit.enterprise.evaluation.service.impl;
+
+public class EvaluationServiceImpl {
+
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="kr.co.itcruit.mapper.ICodingtestMapper">
+ 
+ 	<select id="selectList" resultType="codingtestVO">
+ 		SELECT
+	    qstn_no,
+	    qstn_ttl,
+	    qstn_grd,
+	    qstn_exmpl
+		FROM
+		    codingtest_question
+		where 
+		    QSTN_RLS_YN = 'Y'
+ 	</select>
+ 
+ 	<select id="selectQstnByNo" parameterType="int" resultType="codingtestVO">
+		SELECT 
+		    cq.qstn_no,
+		    qstn_ttl,
+		    qstn_cn,
+		    qstn_grd,
+		    qstn_scr,
+		    qstn_exmpl,
+		    restriction,
+		    c,
+		    cpp,
+		    cs,
+		    java,
+		    javascript,
+		    python
+		FROM codingtest_question cq inner JOIN codingtest_lang cl
+		ON cq.qstn_no = cl.qstn_no
+		where qstn_rls_yn = 'Y'
+		and cq.qstn_no = #{qstnNo}
+ 	</select>	
+ 
+ </mapper>

@@ -1,0 +1,14 @@
+package kr.co.itcruit.mypage.enterprise.service;
+
+import java.util.List;
+
+import kr.co.itcruit.vo.SearchTelentVO;
+
+public interface ISearchTelentService {
+
+	public SearchTelentVO getOptionInfo();
+
+	List<SearchTelentVO> getTelentList(SearchTelentVO searchTelentVO);
+
+	
+}

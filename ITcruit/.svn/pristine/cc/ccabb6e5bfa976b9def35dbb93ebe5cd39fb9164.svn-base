@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="kr.co.itcruit.mapper.IRecruitMapper">
+ 
+ 	<select id="recruitDetail" parameterType="string" resultType="recruitVO">
+ 		select 
+ 			r.RECRUIT_NO ,r.ENT_NO ,r.RECRUIT_TTL, 
+ 			r.RECRUIT_STRT_DT, r.RECRUIT_END_DT, r.RECRUIT_YN,
+ 			r.RECRUIT_CAREER_CODE_NM, r.RECRUIT_CAREER_DT, r.ENT_URL,
+ 			r.RECRUIT_HIT, r.PROCESS_YN, r.PROCESS_AMT,
+ 			r.RECRUIT_PAY, r.RECRUIT_ENROLL_YMD, r.CMMNCD_GRP_CD,
+ 			r.CMMNCD_NM1, r.RECRUIT_CNT, r.PSTN_CMMNCD_NM, e.ent_nm
+ 		from recruit r left join enterprise e on r.ent_no = e.ent_no
+ 		where recruit_no = #{recruitNo}
+ 	</select>
+ 	
+ 	<select id="applyCheck" parameterType="recruitVO" resultType="recruitVO">
+ 		select 
+ 			process_yn, ent_url
+ 		from recruit
+ 		where recruit_no = #{recruitNo}
+ 	</select>
+ 	
+ 	<!-- 리절트맵을 만들어야함 RecruitVO + EnpriseVO = resultMap -->
+ 	<select id="selectInitRecruitList" parameterType="pagingVO" resultType="recruitVO">
+ 		SELECT * FROM (
+            SELECT
+                a.*,
+                ROW_NUMBER() OVER (ORDER BY a.recruit_no DESC) AS rnum
+            FROM (
+                SELECT
+                    r.recruit_no, r.ent_no, r.recruit_ttl, r.recruit_strt_dt, r.recruit_end_dt,
+                    r.recruit_yn, r.recruit_career_code_nm, r.recruit_career_dt, r.ent_url,
+                    r.recruit_hit, r.process_yn, r.process_amt, r.recruit_pay, r.recruit_enroll_ymd,
+                    r.cmmncd_grp_cd, r.cmmncd_nm1, r.recruit_cnt, r.pstn_cmmncd_nm, e.ent_nm
+                FROM
+                    recruit r
+                LEFT JOIN
+                enterprise e ON r.ent_no = e.ent_no  
+                ORDER BY recruit_no DESC
+            ) a
+        ) b
+        WHERE
+         <![CDATA[
+            b.rnum >= #{startRow} AND b.rnum <= #{endRow}
+         ]]>
+ 	</select>
+ 
+ </mapper>

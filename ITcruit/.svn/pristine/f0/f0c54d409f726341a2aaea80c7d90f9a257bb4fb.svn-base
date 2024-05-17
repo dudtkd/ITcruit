@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="kr.co.itcruit.mapper.IRecruitMapper">
+ 
+ 	<select id="recruitDetail" parameterType="string" resultType="recruitVO">
+ 		select 
+ 			recruit_no,	ent_no,	recruit_ttl,
+ 			recruit_strt_dt, recruit_end_dt, recruit_yn,
+ 			recruit_career_code_nm,	recruit_career_dt, ent_url,
+ 			recruit_hit, process_yn, process_amt,
+ 			recruit_pay, recruit_enroll_ymd, cmmncd_grp_cd,
+ 			cmmncd_nm1, recruit_cnt, pstn_cmmncd_nm
+ 		from recruit
+ 		where recruit_no = 'DDI_240412_1775'
+ 	</select>
+ 	
+ 	<select id="applyCheck" parameterType="recruitVO" resultType="recruitVO">
+ 		select 
+ 			process_yn, ent_url
+ 		from recruit
+ 		where recruit_no = 'DDI_240412_1775'
+ 	</select>
+ 
+ </mapper>

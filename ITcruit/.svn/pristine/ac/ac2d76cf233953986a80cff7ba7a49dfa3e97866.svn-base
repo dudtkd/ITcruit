@@ -1,0 +1,10 @@
+package kr.co.itcruit.account.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import kr.co.itcruit.account.service.IMemberAccountService;
+
+@Service
+public class MemberAccountServiceImpl implements IMemberAccountService {
+
+}

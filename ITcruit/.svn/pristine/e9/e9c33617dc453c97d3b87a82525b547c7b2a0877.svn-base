@@ -1,0 +1,54 @@
+package kr.co.itcruit.enterprise.info.service.impl;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.co.itcruit.ServiceResult;
+import kr.co.itcruit.enterprise.info.service.IEnterpriseInfoService;
+import kr.co.itcruit.mapper.IEnterpriseMapper;
+import kr.co.itcruit.vo.EnterpriseVO;
+import kr.co.itcruit.vo.ListPaginationVO;
+
+@Service
+public class EnterpriseInfoServiceImpl implements IEnterpriseInfoService{
+
+	@Inject
+	private IEnterpriseMapper entpriseMapper;
+	
+	/**
+	 * 기업정보목록
+	 */
+	@Override
+	public int selectEntCount(ListPaginationVO<EnterpriseVO> pagingVO) {
+		return entpriseMapper.selectEntCount(pagingVO);
+	}
+
+	/**
+	 * 기업정보목록
+	 */
+	@Override
+	public List<EnterpriseVO> selectEntList(ListPaginationVO<EnterpriseVO> pagingVO) {
+		return entpriseMapper.selectEntList(pagingVO);
+	}
+
+	@Override
+	public ServiceResult likeEnt(EnterpriseVO entVO) {
+		
+		ServiceResult result = null;
+		
+		int status = entpriseMapper.deleteLikeEnt(entVO);
+		
+		if(status > 0) { // 삭제 성공
+			result = ServiceResult.OK;
+		}else {
+			result = ServiceResult.FAILED;
+		}
+		
+		return result;
+	}
+
+	
+}

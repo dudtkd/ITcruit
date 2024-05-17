@@ -1,0 +1,20 @@
+package kr.co.itcruit.mapper;
+
+import java.util.List;
+
+import kr.co.itcruit.vo.AccountVO;
+import kr.co.itcruit.vo.AtchVO;
+import kr.co.itcruit.vo.EnterpriseVO;
+import kr.co.itcruit.vo.PaginationInfoVO;
+
+public interface IAdminMapper {
+
+	public List<AtchVO> entSttsList();
+
+	public int entApproval(AccountVO av);
+
+	public int selectEntCount(PaginationInfoVO<EnterpriseVO> pagingVO);
+
+	public List<EnterpriseVO> selectEntList(PaginationInfoVO<EnterpriseVO> pagingVO);
+
+}

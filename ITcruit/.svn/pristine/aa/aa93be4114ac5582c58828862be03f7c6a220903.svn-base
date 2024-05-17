@@ -1,0 +1,6 @@
+package kr.co.itcruit.enterprise.info.service;
+
+
+public interface IEnterpriseInfoService {
+
+}

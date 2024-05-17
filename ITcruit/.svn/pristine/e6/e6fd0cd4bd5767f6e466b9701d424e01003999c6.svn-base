@@ -1,0 +1,5 @@
+package kr.co.itcruit.atch.controller.service;
+
+public interface IAtchFileService {
+
+}

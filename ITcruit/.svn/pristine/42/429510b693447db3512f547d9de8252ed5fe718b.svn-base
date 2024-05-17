@@ -1,0 +1,12 @@
+package kr.co.itcruit.main.service;
+
+import java.util.List;
+
+import kr.co.itcruit.vo.RecruitVO;
+
+public interface IRecruitListService {
+
+	public RecruitVO recruitDetail(int entNo);
+	
+	public List<RecruitVO> getRecruitList();
+}
